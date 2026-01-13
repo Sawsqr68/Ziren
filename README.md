@@ -42,7 +42,7 @@ This project handles cryptographic operations and zero-knowledge proofs. Securit
 
 - 🔴 **Critical**: Modified cryptographic libraries require independent audit
 - 🟡 **High**: Git dependencies without pinned commits
-- 🟡 **Medium**: Missing CI/CD security scanning
+- 🟢 **Implemented**: Automated CI/CD security scanning now active
 
 See [SECURITY_AUDIT.md](SECURITY_AUDIT.md) for full details.
 

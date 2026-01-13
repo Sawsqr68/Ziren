@@ -50,7 +50,7 @@ jobs:
         run: cargo install cargo-geiger --locked
       
       - name: Check for unsafe code
-        run: cargo geiger --update-readme --output-format GitHubMarkdown
+        run: cargo geiger --output-format GitHubMarkdown
         continue-on-error: true
 
   dependency_review:
