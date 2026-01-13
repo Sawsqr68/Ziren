@@ -30,6 +30,26 @@ Learn more about Ziren at [docs.zkm.io](https://docs.zkm.io).
 * All instructions in MIPS32r2, as a whole, are very mature and widely used for more than 20 years. There will be no compatibility issues between ISA modules, and there will be no turmoil caused by manufacturer disputes.
 * MIPS has been successfully applied to Optimism's Fraud Proof VM.
 
+## 🔒 Security
+
+This project handles cryptographic operations and zero-knowledge proofs. Security is critical.
+
+**⚠️ Important**: This project uses modified cryptographic libraries. See [SECURITY_AUDIT.md](SECURITY_AUDIT.md) for a comprehensive security review.
+
+### Security Status
+
+![Security Audit](https://img.shields.io/badge/security-needs_review-red)
+
+- 🔴 **Critical**: Modified cryptographic libraries require independent audit
+- 🟡 **High**: Git dependencies without pinned commits
+- 🟢 **Implemented**: Automated CI/CD security scanning now active
+
+See [SECURITY_AUDIT.md](SECURITY_AUDIT.md) for full details.
+
+### Reporting Security Issues
+
+Please see our [Security Policy](SECURITY.md) for responsible disclosure.
+
 ## Acknowledgements
 Ziren draws inspiration from the following projects, which represents the cutting-edge zero-knowledge proof systems. 
 - [Plonky3](https://github.com/Plonky3/Plonky3): Ziren proving backend is based on Plonky3.
