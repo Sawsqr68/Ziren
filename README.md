@@ -9,6 +9,25 @@
 
 # Ziren
 
+## 🔒 Security Status
+
+![Security Scan](https://github.com/Sawsqr68/Ziren/actions/workflows/comprehensive-security.yml/badge.svg)
+![CodeQL](https://github.com/Sawsqr68/Ziren/actions/workflows/comprehensive-security.yml/badge.svg)
+![Dependency Review](https://github.com/Sawsqr68/Ziren/workflows/dependency-review/badge.svg)
+
+### Security Measures
+
+- ✅ **Daily** automated security scans
+- ✅ **Weekly** comprehensive security reports
+- ✅ **Pre-commit** hooks with secret detection
+- ✅ **Continuous** dependency monitoring
+- ✅ **SAST** analysis with Semgrep & CodeQL
+- ✅ **SBOM** generation
+
+See [SECURITY.md](SECURITY.md) for our security policy.
+
+---
+
 Ziren(formerly zkMIPS) is an open-source, simple, stable, and universal zero-knowledge virtual machine on MIPS32r2 instruction set architecture(ISA).
 
 
