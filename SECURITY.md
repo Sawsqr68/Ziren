@@ -13,7 +13,7 @@
 
 ### How to Report
 
-1. Email: security@zkm.io (or appropriate security contact)
+1. Email: security@zkm.io
 2. Use PGP encryption for sensitive reports: [Contact us for PGP key]
 3. Expected response time: 48 hours
 
