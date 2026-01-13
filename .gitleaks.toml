@@ -1,0 +1,39 @@
+title = "Gitleaks Configuration for Ziren"
+
+[[rules]]
+id = "generic-api-key"
+description = "Generic API Key"
+regex = '''(?i)(api[_-]?key|apikey)['\"]?\s*[:=]\s*['\"]?[a-z0-9]{32,}'''
+tags = ["key", "API"]
+
+[[rules]]
+id = "aws-access-token"
+description = "AWS Access Token"
+regex = '''(A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16}'''
+tags = ["aws", "token"]
+
+[[rules]]
+id = "private-key"
+description = "Private Key"
+regex = '''-----BEGIN (?:RSA|OPENSSH|DSA|EC|PGP) PRIVATE KEY-----'''
+tags = ["key", "private"]
+
+[[rules]]
+id = "github-token"
+description = "GitHub Token"
+regex = '''gh[pousr]_[A-Za-z0-9_]{36,255}'''
+tags = ["github", "token"]
+
+[[rules]]
+id = "slack-token"
+description = "Slack Token"
+regex = '''xox[baprs]-([0-9a-zA-Z]{10,48})'''
+tags = ["slack", "token"]
+
+[allowlist]
+description = "Allowlist"
+paths = [
+    '''\.git/''',
+    '''node_modules/''',
+    '''target/''',
+]

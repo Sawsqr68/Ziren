@@ -13,3 +13,14 @@ proof-with-is-prime.bin
 **/program.bin
 **/stdin.bin
 
+# Security reports
+reports/
+audit-report.json
+geiger-report.md
+semgrep-report.json
+trivy-results.sarif
+sbom.spdx.json
+comment.md
+audit.log
+clippy.log
+

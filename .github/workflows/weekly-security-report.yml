@@ -1,0 +1,57 @@
+name: Weekly Security Report
+
+on:
+  schedule:
+    # كل يوم أحد الساعة 8 صباحاً UTC
+    - cron: '0 8 * * 0'
+  workflow_dispatch:
+
+jobs:
+  weekly-report:
+    name: Generate Weekly Security Report
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.2.2
+      
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+      
+      - name: Install tools
+        run: |
+          cargo install cargo-audit --locked
+          cargo install cargo-deny --locked
+          cargo install cargo-geiger --locked
+      
+      - name: Run all security checks
+        run: |
+          echo "# 🔒 Weekly Security Report - $(date +%Y-%m-%d)" > report.md
+          echo "" >> report.md
+          
+          echo "## 📊 Dependency Audit" >> report.md
+          cargo audit --json | jq -r '.vulnerabilities.list[] | "- **\(.advisory.id)**: \(.advisory.title) (Severity: \(.advisory.severity))"' >> report.md || echo "No vulnerabilities found" >> report.md
+          echo "" >> report.md
+          
+          echo "## 📜 License Check" >> report.md
+          cargo deny check licenses 2>&1 | tail -n 20 >> report.md
+          echo "" >> report.md
+          
+          echo "## ⚠️ Unsafe Code Statistics" >> report.md
+          cargo geiger --output-format GitHubMarkdown >> report.md || echo "Error running geiger" >> report.md
+          echo "" >> report.md
+          
+          echo "## 🔍 Recommendations" >> report.md
+          echo "1. Review all HIGH and CRITICAL vulnerabilities" >> report.md
+          echo "2. Update dependencies with security patches" >> report.md
+          echo "3. Review unsafe code blocks" >> report.md
+          echo "4. Check license compliance" >> report.md
+      
+      - name: Create Issue
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: "🔒 Weekly Security Report - ${{ github.event.repository.name }}"
+          content-filepath: report.md
+          labels: security, weekly-report

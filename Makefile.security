@@ -1,0 +1,28 @@
+.PHONY: security-check security-audit security-full security-quick
+
+security-quick:
+	@echo "🔍 Running quick security check..."
+	@cargo audit
+	@cargo clippy -- -W clippy::unwrap_used -W clippy::panic
+
+security-audit:
+	@echo "🔒 Running comprehensive security audit..."
+	@cargo install cargo-audit cargo-deny cargo-geiger --locked
+	@cargo audit --json > reports/audit.json
+	@cargo deny check
+	@cargo geiger > reports/unsafe.txt
+
+security-full:
+	@echo "🛡️ Running full security scan..."
+	@mkdir -p reports
+	@cargo audit --json > reports/audit.json
+	@cargo deny check > reports/deny.txt 2>&1
+	@cargo geiger --output-format GitHubMarkdown > reports/unsafe.md
+	@cargo clippy --all-targets -- -D warnings -W clippy::unwrap_used > reports/clippy.txt 2>&1
+	@echo "✅ Full security scan complete. Check reports/ directory"
+
+security-install:
+	@echo "📦 Installing security tools..."
+	@cargo install cargo-audit cargo-deny cargo-geiger --locked
+	@pip install pre-commit
+	@pre-commit install
